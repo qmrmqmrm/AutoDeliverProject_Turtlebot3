@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+  <package format="1">
+  <name>teleop_servo1</name>
+  <version>0.0.1</version>
+  <description>The teleop_servo with opencr package</description>
+
+  <maintainer email="wjdghtjd55@naver.com">jhs</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>msgTutorial</build_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>message_generation</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>msgTutorial</run_depend>
+
+  <export>
+  </export>
+</package>
