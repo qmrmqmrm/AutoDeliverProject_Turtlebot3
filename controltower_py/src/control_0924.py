@@ -80,7 +80,7 @@ class Control:
             self.mode = "waiting_position"
         else:
             rospy.Subscriber("/move_base/result", MoveBaseActionResult, self.GoalPoseCallback)
-            if self.goal_status == 3 or self.goal_status == 4:
+            if self.goal_status == 3 or self.goal_status == 4: # if goal reached
                 self.mode = "detect_marker"
             else:
                 pass
