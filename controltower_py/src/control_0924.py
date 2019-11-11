@@ -70,13 +70,14 @@ class Control:
     def return_to_base(self):
         # set mode
         if self.mode == "return_to_base":
-            self.vel.pose.position.x = -0.4
-            self.vel.pose.position.y = 0.4
+            self.vel.pose.position.x = -0.014
+            self.vel.pose.position.y = -0.93
             self.vel.pose.position.z = 0
-            self.vel.pose.orientation.z = -0.70444
-            self.vel.pose.orientation.w = 0.7098
+            self.vel.pose.orientation.z = 0.988
+            self.vel.pose.orientation.w = -0.1546
             self.vel.header.frame_id = "map"
             self.goal_pub.publish(self.vel)
+
             self.mode = "waiting_position"
         else:
             rospy.Subscriber("/move_base/result", MoveBaseActionResult, self.GoalPoseCallback)
@@ -126,50 +127,48 @@ class Control:
         self.rate = rospy.Rate(data)
         self.rate.sleep()
         
+    
     def PickUp(self):
-        self.Delay(20)
-        self.cmd.angular.z = 0.995
+        self.Delay(3)
+        self.cmd.angular.z = -0.995
         self.cmd_pub.publish(self.cmd)
         self.Delay(0.3)
         self.cmd.angular.z = 0.0
-        self.cmd.linear.x = -0.1
+        self.cmd.linear.x = -0.07
         self.cmd_pub.publish(self.cmd)
-        self.Delay(0.3)
+        self.Delay(0.5)
         self.cmd.linear.x = 0.0
-        self.serv.data = 120
+        self.serv.data = 835
         self.servo_pub.publish(self.serv)
         self.cmd_pub.publish(self.cmd)
-        self.Delay(2.3)
-        self.serv.data = 80
-        self.servo_pub.publish(self.serv)
-        self.cmd.linear.x = 0.1
+        self.Delay(3)
+        self.cmd.linear.x = 0.07
         self.cmd_pub.publish(self.cmd)
-        self.Delay(0.3)
+        self.Delay(0.5)
         self.cmd.linear.x = 0.0
         self.cmd_pub.publish(self.cmd)
-        self.Delay(20)
+        self.Delay(5)
 
+    
     def PickDown(self):
-        self.Delay(20)
-        self.serv.data = 50
+        self.Delay(1)
+        self.serv.data = 500
         self.servo_pub.publish(self.serv)
-        self.Delay(2.8)
-        self.serv.data = 80
-        self.servo_pub.publish(self.serv)
-        self.cmd.linear.x = 0.1
+        self.Delay(3)
+        self.cmd.linear.x = 0.05
         self.cmd_pub.publish(self.cmd)
-        self.Delay(0.3)
+        self.Delay(0.5)
         self.cmd.linear.x = 0.0
         self.cmd_pub.publish(self.cmd)
-        self.Delay(20)
+        self.Delay(1)
 
     def Navigation(self):
         if self.marker_id == 1:
-            self.vel.pose.position.x = -2.175
-            self.vel.pose.position.y = 0.87
+            self.vel.pose.position.x = -0.135
+            self.vel.pose.position.y = 1.36
             self.vel.pose.position.z = 0
-            self.vel.pose.orientation.z = -0.02
-            self.vel.pose.orientation.w = 1.0
+            self.vel.pose.orientation.z = 0.87
+            self.vel.pose.orientation.w = -0.48
             self.vel.header.frame_id = "map"
         else:
             pass

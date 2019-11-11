@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(teleop_servo1)
 
- add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
@@ -10,35 +10,41 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
 )
 
+
+
+set(CMAKE_CXX_FLAGS "-L/usr/local/lib -pthread")
+
+
 add_message_files(
- FILES
- mode_msg.msg
-)
+  FILES
+  TriggerMsg.msg
+ )
 
 generate_messages(
    DEPENDENCIES
    std_msgs
-)
+ )
+
 
 catkin_package(
-  #INCLUDE_DIRS include
+  INCLUDE_DIRS
   LIBRARIES teleop_servo1
   CATKIN_DEPENDS roscpp std_msgs geometry_msgs
 )
 
 include_directories(
-# include
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(mode_select src/mode_select.cpp)
-target_link_libraries(mode_select ${catkin_LIBRARIES})
-add_dependencies(mode_select ${${catkin_LIBRARIES}}_EXPORTED_TARGETS ${catkin_EXPORTED_TARGETS})
-
-add_executable(servo_pub src/servo_pub.cpp)
+add_executable(servo_pub /home/turtle/catkin_ws/src/teleop_servo1/src/servo_pub.cpp)
 target_link_libraries(servo_pub ${catkin_LIBRARIES})
-add_dependencies(servo_pub ${${catkin_LIBRARIES}}_EXPORTED_TARGETS ${catkin_EXPORTED_TARGETS})
+add_dependencies(servo_pub ${mode_second}_EXPORTED_TARGETS ${catkin_EXPORTED_TARGETS})
 
-add_executable(step_pub src/step_pub.cpp)
-target_link_libraries(step_pub ${catkin_LIBRARIES})
-add_dependencies(step_pub ${${catkin_LIBRARIES}}_EXPORTED_TARGETS ${catkin_EXPORTED_TARGETS})
+add_executable(signal_pub /home/turtle/catkin_ws/src/teleop_servo1/src/signal_pub.cpp)
+target_link_libraries(signal_pub ${catkin_LIBRARIES})
+add_dependencies(signal_pub ${mode_second}_EXPORTED_TARGETS ${catkin_EXPORTED_TARGETS})
+
+
+add_executable(trigger_pub /home/turtle/catkin_ws/src/teleop_servo1/src/trigger_pub.cpp)
+target_link_libraries(trigger_pub ${catkin_LIBRARIES})
+add_dependencies(trigger_pub ${mode_second}_EXPORTED_TARGETS ${catkin_EXPORTED_TARGETS})

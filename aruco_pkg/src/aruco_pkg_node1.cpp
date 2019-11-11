@@ -86,12 +86,13 @@ Mat getByteListFromBits(const Mat &bits) {
 
 void TriggerCallback(const aruco_pkg::ArucoTriggerMsg::ConstPtr& msg) {
     starting = msg->trigger;
+	cout << "      ////          ////    \n \n\n\n\n\n" << endl;
 }
 
 int main(int argc, char *argv[])
 {
 
-	ros::init(argc, argv, "aruco_side_topic_publisher"); 
+	ros::init(argc, argv, "aruco_topic_publisher"); 
 	ros::NodeHandle aruco_nh;
 	ros::NodeHandle aruco_nh2;
 	ros::Publisher aruco_pub = aruco_nh.advertise<aruco_pkg::ArucoMsg>("aruco_msg",10);
@@ -100,12 +101,12 @@ int main(int argc, char *argv[])
 	aruco_pkg::ArucoMsg msg;
 	
     cv::Mat input_image;
-    cv::VideoCapture cap2(0);
+    cv::VideoCapture cap(2);
 
 
     while(true) {
-	ros::spinOnce();
-        cap2>>input_image;
+	
+        cap>>input_image;
         
         Mat input_gray_image;
         cvtColor(input_image, input_gray_image, COLOR_BGR2GRAY);
@@ -160,7 +161,7 @@ int main(int argc, char *argv[])
             }
         }
 
-        cv::imshow("newcontoured2",input_image);
+        cv::imshow("newcontoured",input_image);
 
         vector<vector<Point2f> > detectedMarkers;
         vector<Mat> detectedMarkersImage;
@@ -291,22 +292,21 @@ int main(int argc, char *argv[])
 
                 markerID.push_back(marker_id);
                 final_detectedMarkers.push_back(m);
-                imshow("cornerdetect2",input_image);
+                imshow("cornerdetect",input_image);
             }
 			msg.marker_id = marker_id;
-//if(starting!=0){
-//std::cout<< starting <<std::endl;}
+		//if(starting!=0){
+			//std::cout<< starting <<std::endl;}
 
-			if((starting == 1 && (msg.marker_id >=2) && (msg.marker_id <=5))) {
+			if(starting == 1 && (msg.marker_id ==1)) {
 			    aruco_pub.publish(msg);
 			    ROS_INFO("send msg = %d", msg.marker_id);
 
 			}
 			
 			
-			
         }
-
+		ros::spinOnce();
         if(cv::waitKey(10) == 27)
             break;
     }
