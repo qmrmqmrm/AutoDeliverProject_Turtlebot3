@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
 	aruco_pkg::ArucoMsg msg;
 	
     cv::Mat input_image;
-    cv::VideoCapture cap2(0);
+    cv::VideoCapture cap2(2);
 
 
     while(true) {

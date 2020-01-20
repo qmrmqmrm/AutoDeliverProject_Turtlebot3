@@ -141,11 +141,11 @@ class Control:
             self.check = 0
 
     def return_to_base(self):
-        self.vel.pose.position.x = -0.5705023706
-        self.vel.pose.position.y = 0.34000
+        self.vel.pose.position.x = -0.150932595
+        self.vel.pose.position.y = 0.374625533
         self.vel.pose.position.z = 0
-        self.vel.pose.orientation.z = 0.871953915875
-        self.vel.pose.orientation.w = 0.489587957972
+        self.vel.pose.orientation.z = -0.713975596
+        self.vel.pose.orientation.w = 0.70017058
         self.vel.header.frame_id = "map"
         self.goal_pub.publish(self.vel)
 
@@ -174,6 +174,7 @@ class Control:
     def go_straight(self):
         self.Delay(3)
         self.cmd.linear.x = 0.25
+        self.cmd.angular.z = -0.02
         self.cmd_pub.publish(self.cmd)
         self.Delay(0.55)
         self.cmd.linear.x = 0.0
@@ -224,27 +225,27 @@ class Control:
         self.Delay(5)
 
     def Navigation(self):
-        if self.marker_id == 2:
-            self.vel.pose.position.x = -0.404999643564
-            self.vel.pose.position.y = 0.290000021458
+        #if self.marker_id == 2:
+            #self.vel.pose.position.x = -0.404999643564
+            #self.vel.pose.position.y = 0.290000021458
+            #self.vel.pose.position.z = 0
+            #self.vel.pose.orientation.z = 0.544158668119
+            #self.vel.pose.orientation.w = 0.83898232634
+            #self.vel.header.frame_id = "map"
+        if self.marker_id == 3:
+            self.vel.pose.position.x = -1.12754
+            self.vel.pose.position.y = 1.75136
             self.vel.pose.position.z = 0
-            self.vel.pose.orientation.z = 0.544158668119
-            self.vel.pose.orientation.w = 0.83898232634
-            self.vel.header.frame_id = "map"
-        elif self.marker_id == 3:
-            self.vel.pose.position.x = 1.525
-            self.vel.pose.position.y = 1.190
-            self.vel.pose.position.z = 0
-            self.vel.pose.orientation.z = 0.995
-            self.vel.pose.orientation.w = 0.0953
+            self.vel.pose.orientation.z = -0.38301
+            self.vel.pose.orientation.w = 0.92374
             self.vel.header.frame_id = "map"
         
         elif self.marker_id == 4:
-            self.vel.pose.position.x = 1.174798
-            self.vel.pose.position.y = 1.5100001
+            self.vel.pose.position.x = -0.34915
+            self.vel.pose.position.y = 1.72543
             self.vel.pose.position.z = 0
-            self.vel.pose.orientation.z = -0.8416
-            self.vel.pose.orientation.w = 0.540
+            self.vel.pose.orientation.z = 0.87702
+            self.vel.pose.orientation.w = -0.48044
             self.vel.header.frame_id = "map"
         else:
             pass

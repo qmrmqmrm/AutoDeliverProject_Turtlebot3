@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
 	aruco_pkg::ArucoMsg msg;
 	
     cv::Mat input_image;
-    cv::VideoCapture cap(2);
+    cv::VideoCapture cap(0);
 
 
     while(true) {
@@ -298,6 +298,11 @@ int main(int argc, char *argv[])
 		//if(starting!=0){
 			//std::cout<< starting <<std::endl;}
 
+			/*if(msg.marker_id ==1) {
+			    aruco_pub.publish(msg);
+			    ROS_INFO("send msg = %d", msg.marker_id);
+
+			}*/
 			if(starting == 1 && (msg.marker_id ==1)) {
 			    aruco_pub.publish(msg);
 			    ROS_INFO("send msg = %d", msg.marker_id);
